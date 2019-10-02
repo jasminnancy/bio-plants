@@ -1,0 +1,9 @@
+<% if new_object.errors %>
+    <div style="display: inline-block;"
+        <ul>
+            <% new_object.errors.full_messages.each do |message| %>
+                <p style="color: red;"><%= message %></p>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

@@ -1,0 +1,40 @@
+<br>
+<div class="row">
+    <div class="column-left">
+        <% if @user.id != session[:user_id] %>
+            <a href="<%= users_path %>"><button style="margin-left: 40%;">Go Back</button></a>
+        <% else %>
+            <div style="margin-top: 69px;"></div>
+        <% end %>
+        <div class="profile-picture" style="text-align: center; margin-top: 50px;">
+            <img src="<%= @user.profile_pic %>">
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+            <% if @user.first_name && @user.last_name %>
+                <h3><%= @user.full_name %></h3>
+            <% end %>
+            <% if @user.bio %>
+                <p><%= @user.bio %></p>
+            <% end %><br>
+            <% if @user.id == session[:user_id] %>
+                <%= link_to "Edit Profile", edit_user_path(current_user) %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="column-right">
+        <h1 style="text-align: left; font-size: 250%;"><%= @user.username.upcase %></h1>
+
+        <div style="margin-left: 30px; margin-top: 50px;">
+            <h3>Plants Owned: <%= @plants.count %></h3>
+            <% if @user.plants != [] %>
+                <h3>Overall Plant Happiness: <%= (@plants.map { |plant| plant.stat_total }.sum) / @plants.count %></h3><br>
+            <% end %> 
+
+            <% if @user.id == session[:user_id] %>
+                <br><br><br>
+                Your account is <%= @user.age %> and was created on <%= @user.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+            <% end %>
+        </div>
+    </div>
+</div>

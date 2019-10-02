@@ -1,0 +1,18 @@
+<br><br><br>
+<div style="text-align: center;">  
+    <div style="display: inline-block; background-color: #ececec; width: 400px; height: auto;">
+        <h1 style="margin-top: 50px;">Please Login Below</h1><br><br>
+
+        <%= form_tag "/login" do %>
+            <%= label_tag :username, "Username" %><br>
+            <%= text_field_tag :username %><br><br>
+            <%= label_tag :password %><br>
+            <%= password_field_tag :password %><br><br><br>
+            <% if flash["error"] %>
+                <div style="color: red;"><%= flash["error"] %></div><br>
+            <% end %>
+            <%= submit_tag "Login" %>
+        <% end %><br><br>
+    </div>
+    <h4><%= link_to "create an account", new_user_path %></h4><br>
+</div>

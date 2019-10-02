@@ -1,0 +1,163 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ ul {
+    list-style-type: none;
+    margin: 0;
+    margin-right: 45px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #eeeeee;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: #5c5b5b;
+    text-align: center;
+    padding: 20px 50px;
+    text-decoration: none;
+    font-style: italic;
+  }
+
+  li a, .dropbtn {
+    display: inline-block;
+    color: #5c5b5b;
+    text-align: center;
+    padding: 20px 50px;
+    text-decoration: none;
+  }
+  
+  li a:hover, .dropdown:hover .dropbtn {
+    color: black;
+  }
+  
+  li.dropdown {
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 20px 50px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {background-color: white;}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .active {
+    background-color: #eeeeee;
+  }
+
+  .box {
+    border-style: solid; 
+    margin-top: 10px; 
+    margin-bottom: 10px;
+    margin-left: 70px;
+    margin-right: 20px;
+    border-width: 1px; 
+    float: left; 
+    height: 72px;
+    width: 100px;
+    color: black;
+    text-decoration: none;
+  }
+
+  .content-box {
+    margin: auto; 
+    background-color: white; 
+    width: 95%; 
+    min-height: 650px;
+  }
+
+  .home-page-image img {
+    max-width: 500px;
+    display: block;
+    margin: auto;
+    margin-top: 25px;
+  }
+
+  .coming-soon-image img {
+    max-width: 100px;
+    display: block;
+    margin: auto;
+    margin-top: 150px;
+  }
+
+  .profile-picture img {
+    max-width: 225px;
+    max-height: 200px;
+    border: dotted;
+    border-width: 2px;
+    padding: 10px;
+    border-color: grey;
+  }
+
+  .column {
+    float: left;
+    width: 33.33%;
+  }
+
+  .column-left {
+    float: left;
+    width: 25%;
+  }
+
+  .column-right {
+    float: right;
+    width: 75%;
+  }
+
+  .single-plant {
+    margin: auto;
+    text-align: center;
+  }
+
+  .two-plants {
+    float: left;
+    width: 50%;
+    text-align: center;
+  }
+
+  .many-plants {
+    float: left;
+    width: 33.33%;
+    text-align: center;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }

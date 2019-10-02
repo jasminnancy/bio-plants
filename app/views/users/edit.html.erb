@@ -1,0 +1,51 @@
+<br>
+<div class="row">
+    <div class="column-left">
+        <a href="<%= user_path(current_user) %>"><button style="margin-left: 40%;">Go Back</button></a>
+        <div class="profile-picture" style="text-align: center; margin-top: 50px;">
+            <img src="<%= @user.profile_pic %>">
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+            <% if @user.first_name && @user.last_name %>
+                <h3><%= @user.full_name %></h3>
+            <% end %>
+            <% if @user.bio %>
+                <p><%= @user.bio %></p>
+            <% end %><br>
+        </div>
+    </div>
+
+    <div class="column-right">
+        <div style="margin-left: 40px;">
+            <%= render partial: "layouts/error_list", locals: {new_object: @user} %>
+            <%= form_for @user do |f| %>
+                <h3>Edit Your Profile: </h3>
+                <%= f.label :first_name %><br>
+                <%= f.text_field :first_name, size: 20 %><br><br>
+
+                <%= f.label :last_name %><br>
+                <%= f.text_field :last_name, size: 20 %><br><br>
+
+                <%= f.label :bio %><br>
+                <%= f.text_area :bio, size: "30x4" %><br><br>
+
+                <%= f.label :profile_pic, "Profile Picture URL"%><br>
+                <%= f.text_field :profile_pic, size: 50 %><br><br>
+
+                <h3>Account Information: </h3>
+                <%= f.label :email %><br>
+                <%= f.text_field :email, size: 30 %><br><br>
+
+                <%= f.label :password %><br>
+                <%= f.password_field :password, size: 20 %><br><br><br>
+                
+                <%= f.submit 'Update Account' %><br><br><br>
+            <% end %>
+        </div>
+
+        <div style="float:right; margin-right: 20px;">
+            <%= link_to "Delete Account", @user, method: :delete, data: { confirm: "Are you sure? This can't be undone." } %>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<br><br><br>
+<div style="text-align: center;">  
+    <div style="display: inline-block; background-color: #ececec; width: 400px; height: auto;">
+        <h1 style="margin-top: 50px;">Please Sign Up Below</h1><br>
+
+        <%= render partial: "layouts/error_list", locals: {new_object: @user} %>
+        <%= form_for @user do |f| %>
+            <%= f.label :username %><br>
+            <%= f.text_field :username %><br><br>
+            <%= f.label :email %><br>
+            <%= f.text_field :email %><br><br>
+            <%= f.label :password %><br>
+            <%= f.password_field :password %><br><br><br>
+            <%= f.submit %><br><br><br>
+        <% end %>
+    </div>
+    <h4><%= link_to "login instead", login_path %></h4>
+</div>

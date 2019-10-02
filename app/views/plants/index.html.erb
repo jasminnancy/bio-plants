@@ -1,0 +1,40 @@
+<br>
+<% if current_user %>
+
+    <div class="row">
+        <% @plants.each do |plant| %>
+        <% if @plants.count == 1 %>
+            <div class="single-plant">
+        <% elsif @plants.count == 2 %>
+            <div class="two-plants">
+        <% else %>
+            <div class="many-plants">
+        <% end %>
+                <% if plant.nickname == nil || plant.nickname == "" %>
+                    <div style="margin-top: 78px;"></div>
+                <% else %>
+                    <h1><i><%= plant.nickname %></i></h1>
+                <% end %>
+                    <% if plant.stat_total >= 70 %>
+                        <div class="profile-picture"><a href="<%= plant_path(plant) %>"><%= image_tag("happy.jpg") %></a></div>
+                    <% else %>
+                        <div class="profile-picture"><a href="<%= plant_path(plant) %>"><%= image_tag("sad.jpeg") %></a></div>
+                    <% end %>
+                <h3>~ <%= plant.name %> ~</h3>
+                <p>Health: <%= plant.health %></p>
+                <p>Happiness: <%= plant.happiness %></p>
+                <p>Hunger: <%= plant.hunger %></p>
+            </div>
+        <% end %>
+    </div>
+
+<% else %>
+
+    <div class="home-page-image"><%= image_tag("sad-cloud.gif") %></div>
+    <div style="text-align: center; margin-top: 100px;">
+        <h3>You must be signed in to view your plants!</h3>
+        <br>
+        <h3><%= link_to "log in", '/login' %> or <%= link_to "sign up", new_user_path %></h3>
+    </div>
+
+<% end %>

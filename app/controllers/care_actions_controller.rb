@@ -1,0 +1,3 @@
+class CareActionsController < ApplicationController
+
+end

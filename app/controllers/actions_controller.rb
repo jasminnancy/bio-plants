@@ -1,0 +1,3 @@
+class ActionsController < ApplicationController
+
+end

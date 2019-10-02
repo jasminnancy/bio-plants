@@ -1,0 +1,11 @@
+<br>
+<% if current_user %>
+
+<% else %>
+    <div class="home-page-image"><%= image_tag("sad-cloud.gif") %></div>
+    <div style="text-align: center; margin-top: 100px;">
+        <h3>You must be signed in to view your friends!</h3>
+        <br>
+        <h3><%= link_to "log in", '/login' %> or <%= link_to "sign up", new_user_path %></h3>
+    </div>
+<% end %>
