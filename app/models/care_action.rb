@@ -3,5 +3,9 @@ class CareAction < ApplicationRecord
     belongs_to :plant
     belongs_to :action
 
-    
+    def time_elapsed
+        now = DateTime.now
+        created = self.created_at
+        ((now.to_time - created.to_time) / 60.0).round
+    end
 end

@@ -8,14 +8,14 @@
                 <img src="<%= @user.profile_pic %>">
             </div>
             <div style="margin-top: 20px; text-align: center;">
-                <h3><%= @user.username %></h3>
+                <h3><%= @user.username %></h3></a>
+                <p><%= @user.friendships.count %> Friends<p>
             </div>
-        </a>
     </div>
 
-    <div class="column-right">
+    <div class="column-right" style="margin-bottom: 40px;">
         <div class="row" style="border: solid; border-width: 1px; padding: 20px; margin-right: 50px;">
-            <h1 style="text-align: center;">All Users</h1>
+            <h1 style="text-align: center; margin-bottom: 5px;">All Users</h1>
 
             <% @users.each do |user| %>
                 <a href="<%= user_path(user) %>">
@@ -24,22 +24,23 @@
                             <img src="<%= user.profile_pic %>"><br>
                         </div>
                         <div style="text-align: center;">
-                            <h3><%= user.username %></h3>
+                            <h3><%= user.username %></h3></a>
+                            <p><%= @user.friendships.count %> Friends<p>
                         </div>
-                </a></div>
+                    </div>
             <% end %>
         </div>
     </div>
 
 <% else %>
 
-<div class="home-page-image">
-    <%= image_tag("sad-cloud.gif") %>
-</div>
-<div style="text-align: center; margin-top: 100px;">
-    <h3>You must be signed in to view your profile!</h3>
-    <br>
-    <h3><%= link_to "log in", '/login' %> or <%= link_to "sign up", new_user_path %></h3>
-</div>
+    <div class="home-page-image">
+        <%= image_tag("sad-cloud.gif") %>
+    </div>
+    <div style="text-align: center; margin-top: 100px;">
+        <h3>You must be signed in to view your profile!</h3>
+        <br>
+        <h3><%= link_to "log in", '/login' %> or <%= link_to "sign up", new_user_path %></h3>
+    </div>
 
 <% end %>

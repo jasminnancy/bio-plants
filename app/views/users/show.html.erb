@@ -2,21 +2,34 @@
 <div class="row">
     <div class="column-left">
         <% if @user.id != session[:user_id] %>
-            <a href="<%= users_path %>"><button style="margin-left: 40%;">Go Back</button></a>
+            <a href="<%= users_path %>"><button style="margin-left: 40%; margin-top: 6px;">Go Back</button></a>
         <% else %>
-            <div style="margin-top: 69px;"></div>
+            <div style="margin-top: 73px;"></div>
         <% end %>
-        <div class="profile-picture" style="text-align: center; margin-top: 50px;">
+        <div class="profile-picture" style="text-align: center; margin-top: 40px;">
             <img src="<%= @user.profile_pic %>">
         </div>
         <div style="margin-top: 20px; text-align: center;">
             <% if @user.first_name && @user.last_name %>
                 <h3><%= @user.full_name %></h3>
             <% end %>
+
             <% if @user.bio %>
-                <p><%= @user.bio %></p>
-            <% end %><br>
+                <p><i><%= @user.bio %></i></p>
+            <% end %>
+
+            <% if @user.id != session[:user_id] && !@user.friends.include?(session[:user_id]) %>
+                <button><p style="margin-left: 12px; margin-right: 12px;">Add Friend</p></button>
+            <% end %>
+
+            <% if @user.id != session[:user_id] && @user.friends.include?(session[:user_id]) %>
+                <button><p style="margin-left: 12px; margin-right: 12px;">Remove Friend</p></button>
+            <% end %>
+
+            <p><%= @user.friendships.count %> Friends</p>
+
             <% if @user.id == session[:user_id] %>
+                <br><br>
                 <%= link_to "Edit Profile", edit_user_path(current_user) %>
             <% end %>
         </div>
@@ -25,15 +38,45 @@
     <div class="column-right">
         <h1 style="text-align: left; font-size: 250%;"><%= @user.username.upcase %></h1>
 
-        <div style="margin-left: 30px; margin-top: 50px;">
+        <div style="margin-left: 30px; margin-top: 30px;">
             <h3>Plants Owned: <%= @plants.count %></h3>
             <% if @user.plants != [] %>
-                <h3>Overall Plant Happiness: <%= (@plants.map { |plant| plant.stat_total }.sum) / @plants.count %></h3><br>
+                <h3>Overall Plant Happiness: <%= (@plants.map { |plant| plant.stat_total }.sum) / @plants.count %>%</h3>
             <% end %> 
+
+        <div class="row" style="border: solid; border-width: 1px; padding: 20px; margin-top: 50px; margin-right: 50px;">
+            <div class="row">
+            <% @plants.each do |plant| %>
+            <% if @plants.count == 1 %>
+                <div class="single-plant">
+            <% elsif @plants.count == 2 %>
+                <div class="two-plants">
+            <% else %>
+                <div class="many-plants">
+            <% end %>
+                    <% if plant.nickname == nil || plant.nickname == "" %>
+                        <div style="margin-top: 74px;"></div>
+                    <% else %>
+                        <h1><i><%= plant.nickname %></i></h1>
+                    <% end %>
+                        <% if plant.stat_total >= 70 %>
+                            <div class="profile-picture"><a href="<%= plant_path(plant) %>"><%= image_tag("happy.jpg") %></a></div>
+                        <% else %>
+                            <div class="profile-picture"><a href="<%= plant_path(plant) %>"><%= image_tag("sad.jpeg") %></a></div>
+                        <% end %>
+                    <h3>~ <%= plant.name %> ~</h3>
+                    <p>Health: <%= plant.health %></p>
+                    <p>Happiness: <%= plant.happiness %></p>
+                    <p>Hunger: <%= plant.hunger %></p>
+                </div>
+            <% end %>
+        </div>
+    </div>
 
             <% if @user.id == session[:user_id] %>
                 <br><br><br>
                 Your account is <%= @user.age %> and was created on <%= @user.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+                <br>
             <% end %>
         </div>
     </div>

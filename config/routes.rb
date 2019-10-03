@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   get "/logout", to: "sessions#logout"
+
+  get "/plants/:id/water", to: "plants#water"
+  get "/plants/:id/feed", to: "plants#feed"
+  get "/plants/:id/sun", to: "plants#sun"
 end

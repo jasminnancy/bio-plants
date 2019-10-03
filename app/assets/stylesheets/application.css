@@ -98,6 +98,11 @@
     background-color: white; 
     width: 95%; 
     min-height: 650px;
+    height: auto;
+  }
+
+  .clear {
+    clear: both;
   }
 
   .home-page-image img {
@@ -121,6 +126,13 @@
     border-width: 2px;
     padding: 10px;
     border-color: grey;
+  }
+
+  .action-picture img {
+    border-style: 50%;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 50px;
   }
 
   .column {

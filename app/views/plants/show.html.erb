@@ -1,0 +1,104 @@
+<div class="row">
+    <% if @plant.nickname != "" && @plant.nickname != nil %>
+        <h1 style="margin-top: 39px; text-align: center;"><i><%= @plant.nickname %>, the <%= @plant.name %> plant</i></h1>
+    <% else %>
+        <h1 style="margin-top: 39px; text-align: center;"><i><%= @plant.name %></i></h1>
+    <% end %>
+
+    <div class="column-left">
+        <div class="profile-picture" style="text-align: center; margin-top: 20px;">
+            <% if @plant.stat_total >= 70 %>
+                <div class="profile-picture"><%= image_tag("happy.jpg") %></div>
+            <% else %>
+                <div class="profile-picture"><%= image_tag("sad.jpeg") %></div>
+            <% end %>
+            <h3>~ <%= @plant.name %> ~</h3><br>
+            Health Status: <%= @plant.stat_total %>%<br>
+            Resilience: <%= @plant.resilience %><br>
+
+            <% if @plant.user.id == session[:user_id] %>
+                <br>Owned by you!<br>
+                <%= link_to "Edit Plant", edit_plant_path(@plant) %>
+            <% else %>
+                <br>Owned by: <%= link_to @plant.user.username, user_path(@plant.user) %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="column-right">
+        <div style="margin-top: 25px; margin-right: 150px; margin-bottom: 250px;">
+            
+            <div class="action-picture column" style="text-align: center;">
+                <%= image_tag("food.png") %><br><br>
+                <div class="w3-container">
+                    <div class="w3-light-grey w3-round-xlarge">
+                        <div class="w3-container w3-blue w3-round-xlarge" style="width:<%= @plant.hunger %>%"><%= @plant.hunger %>%</div>
+                    </div>
+                </div><br>
+                <button style="padding: 0px;"><a href="/plants/<%= @plant.id %>/feed"><h4 style="margin-left: 18px; margin-right: 18px;">Give Food</h4></a></button>
+            </div>
+
+            <div class="action-picture column" style="text-align: center;">
+                <%= image_tag("sun.png") %><br><br>
+                <div class="w3-container">
+                    <div class="w3-light-grey w3-round-xlarge">
+                        <div class="w3-container w3-blue w3-round-xlarge" style="width:<%= @plant.happiness %>%"><%= @plant.happiness %>%</div>
+                    </div>
+                </div><br>
+                <button style="padding: 0px;"><a href="/plants/<%= @plant.id %>/sun"><h4 style="margin-left: 18px; margin-right: 18px;">Put In Window</h4></a></button>
+            </div>
+
+            <div class="action-picture column" style="text-align: center;">
+                <%= image_tag("water.png") %><br><br>
+                <div class="w3-container">
+                    <div class="w3-light-grey w3-round-xlarge">
+                        <div class="w3-container w3-blue w3-round-xlarge" style="width:<%= @plant.health %>%"><%= @plant.health %>%</div>
+                    </div>
+                </div><br>
+                <button style="padding: 0px;"><a href="/plants/<%= @plant.id %>/water"><h4 style="margin-left: 18px; margin-right: 18px;">Give Water</h4></a></button>
+            </div>
+        </div>
+
+        <div style="margin-top: 75px;">
+            <h4>About <%= @plant.name %> plants:</h4>
+            <% if @plant.name == "Moss" %>
+                <p style="width: 90%;">Moss-type plants are usually bright green in color. Some species can be pale green (almost white), bluish-green,
+                    yellowish-green or velvety black green. Unlike most other plants, mosses do not have vascular tissue (a special
+                    kind of plant tissue that is used to transport water and nutrients through the plant).</p>
+            <% elsif @plant.name == "Flower" %>
+                <p style="width: 90%;">A flower, sometimes known as a bloom or blossom, is the reproductive structure found in flowering plants. Flowers
+                    provide an eye-catching attribute to an otherwise plain, green-leaved plant. In their range of color, size, form,
+                    and anatomical arrangement, flowers present a seemingly endless variety of combinations. They range in size from
+                    minute blossoms to giant blooms. There are even some bioluminescent orchids that emit a greenish-white light, not
+                    just from the petals but also from the roots, stem, and leaves, which is a constant light visible to the human eye,
+                    lasting up to 5 hours at a time.</p>           
+            <% elsif @plant.name == "Fern" %>
+                <p style="width: 90%;">Ferns-type plants are a vascular, seedless plant that belong to the group Pteridophyta. There are around 12,000
+                    types of ferns that differ in size, morphology and type of habitat. Ferns can be found throughout the world. They
+                    live in shady places that provide enough moisture, such as forests, fields, swamps and areas near the streams.
+                    Fern can survive in various climates and on different altitudes. These plants are among the oldest living organisms
+                    on the planet. People use ferns mostly in decorative purposes. Several types of ferns are known as invasive species
+                    due to increased reproduction rate and ability to occupy new habitats quickly. Some species of ferns are listed as
+                    endangered because of the habitat loss (as a result of increased human activity).</p>
+            <% else %>
+                <p style="width: 90%;">Succulents are plants with fleshy, thick tissues adapted to water storage. There are over 60 different succulent
+                    families and about 10,000 plant variants that differ in color, texture, and size. Other than Antarctica, succulents
+                    can be found within each continent. But most succulents come from Africa and South and Central America. Succulents
+                    have the ability to thrive on limited water sources, such as mist and dew, which makes them equipped to survive in an
+                    ecosystem which contains scarce water sources. They are found in nearly all types of habitat, but most often in arid or
+                    semi-arid parts of the world.</p>
+            <% end %>
+        </div>
+
+        <div class="row" style="border: solid; border-width: 1px; padding: 20px; margin-right: 50px; margin-top: 30px;">
+            <h4 style="margin-top: 0px; margin-bottom: 20px;"><u>Care Log</u></h4>  
+            <% @plant.care_actions.last(5).reverse.each do |c| %>
+                <% if c.time_elapsed < 200 %>
+                    <b><%= c.user.username %></b><br>
+                    <%= c.time_elapsed %> minutes ago.<br>
+                    <%= c.action.name %> - <%= c.action.effect %><br><br>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

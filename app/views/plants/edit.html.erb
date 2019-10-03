@@ -1,0 +1,30 @@
+<div class="row">
+    <% if @plant.nickname != "" && @plant.nickname != nil %>
+        <h1 style="margin-top: 39px; text-align: center;"><i><%= @plant.nickname %>, the <%= @plant.name %> plant</i></h1>
+    <% else %>
+        <h1 style="margin-top: 39px; text-align: center;"><i><%= @plant.name %></i></h1>
+    <% end %>
+
+    <div class="column-left">
+        <div class="profile-picture" style="text-align: center; margin-top: 20px;">
+            <% if @plant.stat_total >= 70 %>
+                <div class="profile-picture"><%= image_tag("happy.jpg") %></div>
+            <% else %>
+                <div class="profile-picture"><%= image_tag("sad.jpeg") %></div>
+            <% end %>
+            <h3>~ <%= @plant.name %> ~</h3><br>
+            Health Status: <%= @plant.stat_total %>%<br>
+            Resilience: <%= @plant.resilience %><br>
+        </div>
+    </div>
+
+    <div class="column-right">
+        <div style="border: solid; border-width: 1px; padding: 20px; margin-right: 50px; margin-top: 30px;">
+            <%= form_for @plant do |f| %>
+                <%= f.label :nickname %><br>
+                <%= f.text_field :nickname %><br><br>
+                <%= f.submit "Update"%>
+            <% end %>
+        </div>
+    </div>
+</div>
