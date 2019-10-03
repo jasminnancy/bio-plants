@@ -15,15 +15,17 @@
             <% end %>
 
             <% if @user.bio %>
-                <p><i><%= @user.bio %></i></p>
+                <p style="width: 95%; margin: auto; text-align: center;"><i><%= @user.bio %></i></p><br>
             <% end %>
 
-            <% if @user.id != session[:user_id] && !@user.friends.include?(session[:user_id]) %>
-                <button><p style="margin-left: 12px; margin-right: 12px;">Add Friend</p></button>
-            <% end %>
-
-            <% if @user.id != session[:user_id] && @user.friends.include?(session[:user_id]) %>
-                <button><p style="margin-left: 12px; margin-right: 12px;">Remove Friend</p></button>
+            <% if @user.id != session[:user_id] %>
+                <% if Friendship.find_by(user_id: session[:user_id], friend: @user) %>
+                    <a href="<%= @user.id %>/remove-friend"><button><p style="margin-left: 12px; margin-right: 12px;">Remove Friend</p></button></a>
+                <% elsif FriendRequest.find_by(user_id: session[:user_id], friend_id: @user.id) %>
+                    <button><p style="margin-left: 12px; margin-right: 12px;">Request Pending...</p></button>
+                <% else %>
+                    <a href="<%= @user.id %>/add-friend"><button><p style="margin-left: 12px; margin-right: 12px;">Add Friend</p></button><a>
+                <% end %>
             <% end %>
 
             <p><%= @user.friendships.count %> Friends</p>

@@ -6,7 +6,7 @@
     <% end %>
 
     <div class="column-left">
-        <div class="profile-picture" style="text-align: center; margin-top: 20px;">
+        <div class="profile-picture" style="text-align: center; margin-top: 0px;">
             <% if @plant.stat_total >= 70 %>
                 <div class="profile-picture"><%= image_tag("happy.jpg") %></div>
             <% else %>
@@ -20,6 +20,7 @@
 
     <div class="column-right">
         <div style="border: solid; border-width: 1px; padding: 20px; margin-right: 50px; margin-top: 30px;">
+        <%= render partial: "layouts/error_list", locals: {new_object: @plant} %>
             <%= form_for @plant do |f| %>
                 <%= f.label :nickname %><br>
                 <%= f.text_field :nickname %><br><br>

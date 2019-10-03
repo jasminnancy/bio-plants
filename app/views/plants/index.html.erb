@@ -1,7 +1,31 @@
 <br>
 <% if current_user %>
 
-    <h1 style="text-align: center;">Your Plants</h1>
+    <h1 style="text-align: center;">Plants</h1>
+    <h2 style="margin-left: 50px;">Propogate</h2>
+        <div class="row" style="border: solid; border-width: 1px; width: 95%; margin: auto; padding: 15px;">
+            <div style="float: left;">
+                <%= image_tag("plant.jpg", size: "400x200") %>
+                <% if current_user.plants.count < 6 %>
+                    <div style="float:right;">
+                        <h3 style="float: right; margin-top: 30px;">Carefully select which plant to propogate!</h3><br>
+                        <p>(You can only have 6 plants!)</p>
+
+                        <%= form_for @plant, url: { action: "create" } do |f| %>
+                            <%= f.label :id, text="Select a plant:"%>
+                            <%= f.collection_select :id, @plants, :id, :description, prompt: true %><br><br>
+
+                            <%= f.submit text="Propogate!"%>
+                        <% end %>
+                    </div>
+
+                <% else %>
+                    <h3 style="float: right; margin-top: 50px;">You can't have any more plants!</h3>
+                <% end %>
+            </div>
+        </div><br>
+
+    <h2 style="margin-left: 50px;">Your Plants</h2>
     <div class="row" style="border: solid; border-width: 1px; width: 95%; margin: auto; padding: 15px;">
         <div class="row">
             <% @plants.each do |plant| %>

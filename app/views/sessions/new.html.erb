@@ -6,11 +6,14 @@
         <%= form_tag "/login" do %>
             <%= label_tag :username, "Username" %><br>
             <%= text_field_tag :username %><br><br>
+
             <%= label_tag :password %><br>
             <%= password_field_tag :password %><br><br><br>
+
             <% if flash["error"] %>
-                <div style="color: red;"><%= flash["error"] %></div><br>
+                <div style="color: red; display: inline-block; width: 80%;"><%= flash["error"] %></div><br><br>
             <% end %>
+
             <%= submit_tag "Login" %>
         <% end %><br><br>
     </div>

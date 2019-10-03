@@ -7,6 +7,7 @@ class User < ApplicationRecord
     has_many :friends, through: :friendships
 
     has_secure_password
+    validates :password, length: { minimum: 6 }
     validates :username, presence: true, uniqueness: true
     validates :profile_pic, presence: true
 

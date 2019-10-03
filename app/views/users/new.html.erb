@@ -10,7 +10,9 @@
             <%= f.label :email %><br>
             <%= f.text_field :email %><br><br>
             <%= f.label :password %><br>
-            <%= f.password_field :password %><br><br><br>
+            <%= f.password_field :password %><br><br>
+            <%= label_tag :password_confirmation%><br>
+            <%= password_field_tag :password_confirmation%><br><br><br>
             <%= f.submit %><br><br><br>
         <% end %>
     </div>

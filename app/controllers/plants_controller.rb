@@ -1,12 +1,25 @@
 class PlantsController < ApplicationController
-    before_action :depreciate, only: [:index, :show]
 
     def index
         @plants = Plant.where(user_id: session[:user_id])
+        @plants.each { |plant| plant.depreciate }
+        @plant = Plant.new
+    end
+
+    def propogate
+        if current_user.plants.count < 6
+            byebug
+            @plant = Plant.new
+            @plant.propogate_random
+            @plant.user_id = session[:user_id]
+            @plant.save
+        end
+        redirect_to plant_path(@plant)
     end
 
     def show
         @plant = Plant.find_by(id: params[:id])
+        @plant.depreciate
         @user = session[:user_id]
     end
 
@@ -36,12 +49,13 @@ class PlantsController < ApplicationController
     end
 
     def create
-        @plant = Plant.new(plant_params)
+        @plant = Plant.new(user_id: session[:user_id])
+        @plant.propogate_random(params[:plant][:id])
         
         if @plant.save
             redirect_to plant_path(@plant)
         else
-            render :new
+            redirect_to plants_path
         end
     end
 
@@ -62,13 +76,5 @@ class PlantsController < ApplicationController
 
     def plant_params
         params.require(:plant).permit(:nickname)
-    end
-
-    def depreciate
-        plant = Plant.find_by(id: params[:id])
-        plant.happiness = plant.happiness - plant.elapsed_time
-        plant.health = plant.health - plant.elapsed_time
-        plant.hunger = plant.hunger - plant.elapsed_time
-        plant.save
     end
 end

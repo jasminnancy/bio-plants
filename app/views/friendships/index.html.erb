@@ -1,11 +1,56 @@
 <br>
 <% if current_user %>
+    
+    <div class="column-left" style="margin-top: 48px;">
+        <a href="<%= user_path(@user.id) %>">
+            <div class="profile-picture" style="text-align: center; margin-top: 25px;">
+                <img src="<%= @user.profile_pic %>">
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+                <h3><%= @user.username %></h3></a>
+                <p><%= @user.friendships.count %> Friends<p>
+            </div>
+    </div>
+
+    <div class="column-right" style="margin-bottom: 40px;">
+        <div class="row" style="border: solid; border-width: 1px; padding: 20px; margin-right: 50px;">
+            <% if @incoming != [] %>
+                <h2 style="text-align: center; margin-bottom: 5px;">Friend Requests<h2>
+                <% @incoming.each do |r| %>
+                    <div style="border: outset; height: 130px; margin-left: 30px; margin-right: 30px;">
+                        <div style="margin-left: 20px;">
+                            <p style="margin-top: 15px; font-size: 80%;"><%= link_to r.user.username, user_path(r.user) %></p>
+                            <a href="friendships/<%= r.id %>/accept-request"><button style="height: 35px; margin-right: 15px; float: right;"><p style="font-size: 50%; margin: 4px;">Accept Request</p></button></a>
+                            <a href="friendships/<%= r.id %>/deny-request"><button style="height: 35px; margin-right: 15px; float: right;"><p style="font-size: 50%; margin: 4px;">Deny Request</p></button></a>
+                            <p style="font-size: 50%;"> Friends: <%= r.user.friends.count %></p>
+                        </div>
+                    </div><br>
+                <% end %>
+            <% end %>
+
+            <h1 style="text-align: center; margin-bottom: 5px;">All Friends</h1>
+                <% if @user.friends == [] %>
+                    <p style="margin-left: 40px;">You have no friends!</p>
+                <% else %>
+                    <% @user.friends.each do |friend| %>
+                        <div style="border: outset; height: 130px; margin-left: 30px; margin-right: 30px;">
+                            <h3 style="margin-top: 15px; margin-left: 20px;"><%= link_to friend.username, user_path(friend) %></h3>
+                            <p style="margin-left: 20px; margin-top: 0px; margin-bottom: 0px; font-size: 95%;">Overall Plant Health: <%= (friend.plants.map { |plant| plant.stat_total }.sum) / friend.plants.count %>%</p>
+                            <a href="friendships/<%= friend.id %>/destroy"><button style="height: 35px; margin-right: 15px; float: right;"><p style="margin: 4px;">Delete Friend</p></button></a>
+                            <p style="margin-left: 20px; margin-top: 0px; font-size: 95%;">Friends: <%= friend.friendships.count %></p>
+                        </div><br>
+                    <% end %>
+                <% end %>
+        </div>
+    </div>
 
 <% else %>
+
     <div class="home-page-image"><%= image_tag("sad-cloud.gif") %></div>
     <div style="text-align: center; margin-top: 100px;">
         <h3>You must be signed in to view your friends!</h3>
         <br>
         <h3><%= link_to "log in", '/login' %> or <%= link_to "sign up", new_user_path %></h3>
     </div>
+
 <% end %>

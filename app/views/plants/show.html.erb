@@ -100,5 +100,8 @@
                 <% end %>
             <% end %>
         </div>
+        <br><br>
+        This plant is <%= @plant.age %> and was created on <%= @plant.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+        <br>
     </div>
 </div>

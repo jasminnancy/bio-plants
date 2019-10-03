@@ -13,6 +13,9 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(id: params[:id])
+            if @user == nil
+                redirect_to users_path
+            end
         @plants = Plant.where(user_id: params[:id])
     end
 

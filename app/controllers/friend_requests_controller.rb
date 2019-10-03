@@ -7,11 +7,11 @@ class FriendRequestsController < ApplicationController
     end
 
     def create
-        friend = User.find(params[:friend_id])
+        friend = User.find(params[:id])
         @friend_request = current_user.friend_requests.new(friend: friend)
     
         if @friend_request.save
-          render :show, status: :created, location: @friend_request
+          redirect_to user_path(friend)
         else
           render json: @friend_request.errors, status: :unprocessable_entity
         end
@@ -19,12 +19,12 @@ class FriendRequestsController < ApplicationController
 
     def update
         @friend_request.accept
-        head :no_content
+        redirect_to friendships_path
     end
 
     def destroy
         @friend_request.destroy
-        head :no_content
+        redirect_to friendships_path
     end
 
     private
