@@ -13,7 +13,7 @@
 
                         <%= form_for @plant, url: { action: "create" } do |f| %>
                             <%= f.label :id, text="Select a plant:"%>
-                            <%= f.collection_select :id, @plants, :id, :description, prompt: true %><br><br>
+                            <%= f.collection_select :id, @plants, :id, :description %><br><br>
 
                             <%= f.submit text="Propogate!"%>
                         <% end %>
