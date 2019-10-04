@@ -1,13 +1,4 @@
- ,ggggggggggg,              ,ggggggggggg,                                             
-dP"""88""""""Y8,           dP"""88""""""Y8,dPYb,                         I8           
-Yb,  88      `8b           Yb,  88      `8IP'`Yb                         I8           
- `"  88      ,8P gg         `"  88      ,8I8  8I                      88888888        
-     88aaaad8P"  ""             88aaaad8P"I8  8'                         I8           
-     88""""Y8ba  gg    ,ggggg,  88"""""   I8 dP   ,gggg,gg  ,ggg,,ggg,   I8    ,g,    
-     88      `8b 88   dP"  "Y8gg88        I8dP   dP"  "Y8I ,8" "8P" "8,  I8   ,8'8,   
-     88      ,8P 88  i8'    ,8I 88        I8P   i8'    ,8I I8   8I   8I ,I8, ,8'  Yb  
-     88_____,d8_,88,,d8,   ,d8' 88       ,d8b,_,d8,   ,d8b,dP   8I   Yb,d88b,8'_   8) 
-    88888888P" 8P""YP"Y8888P"   88       8P'"Y8P"Y8888P"`Y8P'   8I   `Y8P""YP' "YY8P8P
+![bioplants logo](https://user-images.githubusercontent.com/26612415/66219339-f9b02980-e698-11e9-9af0-709f4c98d1e4.png)
 
 --------------------------------------------------------------------------------------
 
