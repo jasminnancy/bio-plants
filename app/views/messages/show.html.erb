@@ -1,0 +1,27 @@
+<div>
+    <a href="<%= new_user_message_path(current_user) %>"><button style="margin-top: 25px; margin-right: 70px; float: right; display: inline-block;">Compose New</button></a>
+    <h1 style="margin-left: 60px; float: left; margin-left: 60px;">Sent Messages</h1>
+    <p style="margin-right: 30px; margin-top: 32px; float: right;"><%= link_to "Recieved Messages", messages_path %></p>
+</div>
+<div style="text-align: center;">
+    <div style="border: solid; border-width: 1px; min-height: 480px; display: inline-block; width: 90%; padding: 20px;">
+        <% if current_user.sent_messages == [] %>
+            <h3 style="margin-top: 75px;">You haven't sent any messages!</h3>
+        <% else %>
+            <% @messages.order(created_at: :desc).each do |message| %>
+                <div style="border: dotted; border-width: 1px; width: 90%; min-height: 150px; padding: 15px; display: inline-block;">
+                    <div class="column-left" style="margin-top: 15px;">
+                        To: <%= link_to message.recipient.username, user_path(message.recipient) %><br>
+                        From: <%= link_to message.sender.username, user_path(message.sender) %><br><br>
+                        <%= message.created_at.strftime("%d-%m-%Y") %><br>
+                        <%= message.created_at.strftime("%I:%M %P") %>
+                    </div>
+                    <div class="column-right" style="margin-top: 10px; text-align: left; min-height: 100px; margin-bottom: 10px;">
+                        <b>Message:</b><br>
+                        <%= message.content %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
