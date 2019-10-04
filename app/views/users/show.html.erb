@@ -1,41 +1,37 @@
 <br>
 <div class="row">
     <div class="column-left">
-        <% if @user.id != session[:user_id] %>
-            <a href="<%= users_path %>"><button style="margin-left: 40%; margin-top: 6px;">Go Back</button></a>
-        <% else %>
-            <div style="margin-top: 73px;"></div>
-        <% end %>
-        <div class="profile-picture" style="text-align: center; margin-top: 40px;">
-            <img src="<%= @user.profile_pic %>">
-        </div>
-        <div style="margin-top: 20px; text-align: center;">
-            <% if @user.first_name && @user.last_name %>
-                <h3><%= @user.full_name %></h3>
-            <% end %>
-
-            <% if @user.bio %>
-                <p style="width: 95%; margin: auto; text-align: center;"><i><%= @user.bio %></i></p><br>
-            <% end %>
-
-            <% if @user.id != session[:user_id] %>
-                <% if Friendship.find_by(user_id: session[:user_id], friend: @user) %>
-                    <a href="<%= @user.id %>/remove-friend"><button><p style="margin-left: 12px; margin-right: 12px;">Remove Friend</p></button></a>
-                <% elsif FriendRequest.find_by(user_id: session[:user_id], friend_id: @user.id) %>
-                    <button><p style="margin-left: 12px; margin-right: 12px;">Request Pending...</p></button>
-                <% else %>
-                    <a href="<%= @user.id %>/add-friend"><button><p style="margin-left: 12px; margin-right: 12px;">Add Friend</p></button><a>
+        <div style="margin-top: 73px;"></div>
+            <div class="profile-picture" style="text-align: center; margin-top: 40px;">
+                <img src="<%= @user.profile_pic %>">
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+                <% if @user.first_name && @user.last_name %>
+                    <h3><%= @user.full_name %></h3>
                 <% end %>
-            <% end %>
 
-            <p><%= @user.friendships.count %> Friends</p>
+                <% if @user.bio %>
+                    <p style="width: 95%; margin: auto; text-align: center;"><i><%= @user.bio %></i></p><br>
+                <% end %>
 
-            <% if @user.id == session[:user_id] %>
-                <br><br>
-                <%= link_to "Edit Profile", edit_user_path(current_user) %>
-            <% end %>
+                <% if @user.id != session[:user_id] %>
+                    <% if Friendship.find_by(user_id: session[:user_id], friend: @user) %>
+                        <a href="<%= @user.id %>/remove-friend"><button><p style="margin-left: 12px; margin-right: 12px;">Remove Friend</p></button></a>
+                    <% elsif FriendRequest.find_by(user_id: session[:user_id], friend_id: @user.id) %>
+                        <button><p style="margin-left: 12px; margin-right: 12px;">Request Pending...</p></button>
+                    <% else %>
+                        <a href="<%= @user.id %>/add-friend"><button><p style="margin-left: 12px; margin-right: 12px;">Add Friend</p></button><a>
+                    <% end %>
+                <% end %>
+
+                <p><%= @user.friendships.count %> Friends</p>
+
+                <% if @user.id == session[:user_id] %>
+                    <br><br>
+                    <%= link_to "Edit Profile", edit_user_path(current_user) %>
+                <% end %>
+            </div>
         </div>
-    </div>
 
     <div class="column-right">
         <h1 style="text-align: left; font-size: 250%;"><%= @user.username.upcase %></h1>
