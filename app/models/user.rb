@@ -9,7 +9,7 @@ class User < ApplicationRecord
     has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
 
     has_secure_password
-    validates :password, length: { minimum: 6 }
+    # validates :password, length: { minimum: 6 }
     validates :username, presence: true, uniqueness: true
     validates :profile_pic, presence: true
 

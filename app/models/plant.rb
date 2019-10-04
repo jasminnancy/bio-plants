@@ -87,7 +87,7 @@ class Plant < ApplicationRecord
         now = DateTime.now.in_time_zone('UTC')
         updated = self.updated_at
         time = ((now.to_time - updated.to_time) / (self.resilience * 100)).to_i
-        (time / (random_status_number_generator * 0.25)).round
+        (time / (random_status_number_generator * 0.5)).round
     end
 
     def depreciate
