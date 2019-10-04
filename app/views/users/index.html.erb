@@ -15,7 +15,16 @@
 
     <div class="column-right" style="margin-bottom: 40px;">
         <div class="row" style="border: solid; border-width: 1px; padding: 20px; margin-right: 50px;">
-            <h1 style="text-align: center; margin-bottom: 5px;">All Users</h1>
+            <div style="margin-bottom: 80px;">
+                <h1 style="float: left; margin-left: 40px;">All Users</h1>
+
+                <div style="float: right; margin-right: 25px; margin-top: 25px;">
+                    <%= form_tag(users_path, method: :get) do %>
+                        <%= text_field_tag :search %>
+                        <%= submit_tag 'Search' %>
+                    <% end %>
+                </div>
+            </div>
 
             <% @users.each do |user| %>
                 <a href="<%= user_path(user) %>">

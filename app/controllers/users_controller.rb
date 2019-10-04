@@ -6,8 +6,11 @@ class UsersController < ApplicationController
     end
 
     def index
-        users = User.where.not(id: session[:user_id])
-        @users = users.sort_by { |user| user[:username] }
+        if params[:search]
+            @users = User.where('username LIKE ?', "%#{params[:search]}%").order('id DESC')
+        else
+            @users = User.where.not(id: session[:user_id]).order('id DESC')
+        end
         @user = User.find_by(id: session[:user_id])
     end
 
@@ -59,7 +62,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :password, :email, :first_name, :last_name, :bio, :profile_pic)
+        params.require(:user).permit(:username, :password, :email, :first_name, :last_name, :bio, :profile_pic, :search)
     end
 
     def depreciate
