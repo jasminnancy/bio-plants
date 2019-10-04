@@ -18,7 +18,7 @@
         <div style="margin-left: 40px;">
             <%= render partial: "layouts/error_list", locals: {new_object: @user} %>
             <%= form_for @user do |f| %>
-                <h3>Edit Your Profile: </h3>
+                <h3>Edit Your Public Profile: </h3>
                 <%= f.label :first_name %><br>
                 <%= f.text_field :first_name, size: 20 %><br><br>
 
@@ -29,9 +29,14 @@
                 <%= f.text_area :bio, size: "30x4" %><br><br>
 
                 <%= f.label :profile_pic, "Profile Picture URL"%><br>
-                <%= f.text_field :profile_pic, size: 50 %><br><br>
+                <%= f.text_field :profile_pic, size: 50 %><br><br><br>
 
-                <h3>Account Information: </h3>
+                <%= f.submit 'Edit Profile' %>
+            <% end %><br><br><br>
+
+            <%= form_for @user do |f| %>
+                <h3>Update Account Information:</h3>
+
                 <%= f.label :email %><br>
                 <%= f.text_field :email, size: 30 %><br><br>
 
