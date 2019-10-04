@@ -1,14 +1,17 @@
 class PlantsController < ApplicationController
 
+    ### shows all of the user's plants + shows a new plant form for propogating ###
+
     def index
         @plants = Plant.where(user_id: session[:user_id])
         @plants.each { |plant| plant.depreciate }
         @plant = Plant.new
     end
 
+    ### checks to see if a user has less than 6 plants before propogating a new one ###
+
     def propogate
         if current_user.plants.count < 6
-            byebug
             @plant = Plant.new
             @plant.propogate_random
             @plant.user_id = session[:user_id]
@@ -17,11 +20,16 @@ class PlantsController < ApplicationController
         redirect_to plant_path(@plant)
     end
 
+    ### shows the plant and depreciates it's stats ###
+
     def show
         @plant = Plant.find_by(id: params[:id])
         @plant.depreciate
-        @user = session[:user_id]
+        @user = current_user
     end
+
+    ### workaround for no javascript - care actions are performed by redirecting to a page that ###
+    ### performs an action before redirecting back ###
 
     def water
         plant = Plant.find_by(id: params[:id])
@@ -44,6 +52,8 @@ class PlantsController < ApplicationController
         redirect_to plant_path(plant)
     end
 
+    ### creates a new plant with random stats ###
+
     def new
         @plant = Plant.new
     end
@@ -58,6 +68,8 @@ class PlantsController < ApplicationController
             redirect_to plants_path
         end
     end
+
+    ### allows a user to update the nickname of a plant ###
 
     def edit
         @plant = Plant.find_by(id: params[:id])

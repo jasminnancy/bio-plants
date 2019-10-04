@@ -5,6 +5,9 @@ class UsersController < ApplicationController
     def home
     end
 
+# lets a user search for other users with the params[:search] function before displaying/sorting results
+# if there is no search action performed, it just displays/sorts all users
+
     def index
         if params[:search]
             @users = User.where('username LIKE ?', "%#{params[:search]}%").order('id DESC')
@@ -14,6 +17,8 @@ class UsersController < ApplicationController
         @user = User.find_by(id: session[:user_id])
     end
 
+# displays a specific user and their plants
+
     def show
         @user = User.find_by(id: params[:id])
             if @user == nil
@@ -21,6 +26,8 @@ class UsersController < ApplicationController
             end
         @plants = Plant.where(user_id: params[:id])
     end
+
+# creates a new user with a random-stat generated plant. users cannot exist without a plant!
 
     def new
         @user = User.new
@@ -42,6 +49,8 @@ class UsersController < ApplicationController
         end
     end
 
+# edits a user's full name, email, pass, profile picture, and bio
+
     def edit
         @user = User.find_by(id: session[:user_id])
     end
@@ -52,8 +61,10 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
     end
 
+# destroys a user but not their plants - want to add a greenhouse feature for forfeited plants
+
     def destroy
-        @user = User.find_by(id: session[:user_id])
+        @user = current_user
         @user.destroy
         session.destroy
         redirect_to '/login'
@@ -64,6 +75,8 @@ class UsersController < ApplicationController
     def user_params
         params.require(:user).permit(:username, :password, :email, :first_name, :last_name, :bio, :profile_pic, :search)
     end
+
+# plants depreciate on render to make sure all stats are up-to-date
 
     def depreciate
         plants = Plant.where(user_id: params[:id])

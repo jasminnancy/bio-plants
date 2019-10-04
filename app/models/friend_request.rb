@@ -8,12 +8,16 @@ class FriendRequest < ApplicationRecord
     validate :not_friends
     validate :not_pending
 
+# accepts friend requests, adds it to the user's friends and destroys friend request
+
     def accept
         user.friends << friend
         destroy
     end
 
     private
+
+# ensures that the user cannot request themselves, isn't already a friend, or doesn't already have a pending request
 
     def not_self
         errors.add(:friend, "can't be equal to user") if user == friend

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-
     helper_method :current_user
+
+    ### sets current user to logged in user ###
 
     def current_user
         if @current_user
@@ -15,6 +16,8 @@ class ApplicationController < ActionController::Base
     def logged_in?
         !!current_user
     end
+
+    ### makes sure a user is logged in ###
 
     def authorized
         redirect_to login_path unless logged_in?

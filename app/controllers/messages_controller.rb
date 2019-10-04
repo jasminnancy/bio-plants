@@ -1,13 +1,19 @@
 class MessagesController < ApplicationController
     before_action :set_recipient, only: [:new, :create]
 
+    ### shows all of the current user's received messages ###
+
     def index
         @messages = current_user.messages
     end
 
+    ### shows all of the current user's sent messages ###
+
     def show
         @messages = current_user.sent_messages
     end
+
+    ### creates a new message, sets the recipient id, and adds the message to the recipient's messages ###
 
     def new
         @message = current_user.sent_messages.new

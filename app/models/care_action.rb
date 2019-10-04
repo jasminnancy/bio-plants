@@ -3,6 +3,8 @@ class CareAction < ApplicationRecord
     belongs_to :plant
     belongs_to :action
 
+# calculates time for care log
+
     def time_elapsed
         now = DateTime.now
         created = self.created_at
