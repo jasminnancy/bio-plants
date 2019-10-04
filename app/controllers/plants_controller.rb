@@ -34,21 +34,21 @@ class PlantsController < ApplicationController
     def water
         plant = Plant.find_by(id: params[:id])
         plant.water_plant
-        CareAction.create(plant_id: plant.id, user_id: session[:user_id], action_id: 1)
+        CareAction.create(plant_id: plant.id, user_id: current_user.id, action_id: 1)
         redirect_to plant_path(plant)
     end
 
     def feed
         plant = Plant.find_by(id: params[:id])
         plant.feed_plant
-        CareAction.create(plant_id: plant.id, user_id: session[:user_id], action_id: 2)
+        CareAction.create(plant_id: plant.id, user_id: current_user.id, action_id: 2)
         redirect_to plant_path(plant)
     end
 
     def sun
         plant = Plant.find_by(id: params[:id])
         plant.sun_plant
-        CareAction.create(plant_id: plant.id, user_id: session[:user_id], action_id: 3)
+        CareAction.create(plant_id: plant.id, user_id: current_user.id, action_id: 3)
         redirect_to plant_path(plant)
     end
 
@@ -59,7 +59,7 @@ class PlantsController < ApplicationController
     end
 
     def create
-        @plant = Plant.new(user_id: session[:user_id])
+        @plant = Plant.new(user_id: current_user.id)
         @plant.propogate_random(params[:plant][:id])
         
         if @plant.save

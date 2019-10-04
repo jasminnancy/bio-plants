@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Action.create(name: "Sunshine", effect: "Increases plant's happiness by up to 10 points.")
+Action.create(name: "Water", effect: "Increases plant's health by up to 10 points.")
+Action.create(name: "Feed", effect: "Decreases plant's Hunger by up to 10 points.")
