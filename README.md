@@ -6,7 +6,12 @@ Bioplants is a web-based Ruby On Rails application that was built in 4 days. It 
 
 ## Installation
 After cloning to your computer, open BioPlants in the text editor of your choice.
-Run bundle install before starting your server up for testing.
+Run the following commands before starting your server up for testing:
+```
+bundle install
+rails db:migrate
+rails db:seed
+```
 You are then able to use the full functionality of the application and can create as many accounts as you like!
 
 ## Contributing
